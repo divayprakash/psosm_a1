@@ -5,6 +5,9 @@ import json
 import jsonpickle
 import os
 from collections import Counter
+import plotly
+from plotly.offline import plot
+import plotly.graph_objs as go
 import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
@@ -20,7 +23,7 @@ else:
   print ("Twitter API authentication successfull")
 
 searchQuery = '#PanamaPapers'
-maxTweets = 10
+maxTweets = 10000
 tweetsPerQry = 100
 fName = 'tweets.txt'
 language = 'en'
@@ -70,5 +73,7 @@ print ("Downloaded {0} tweets, saved to {1}".format(tweetCount, fName))
 
 words_dict = Counter(tweets_words)
 histogram_data = words_dict.most_common(20)
-print histogram_data
+keys = [x[0] for x in histogram_data]
+values = [x[1] for x in histogram_data]
 
+plot([go.Bar(x=keys, y=values)], image='svg', image_filename='hist')
