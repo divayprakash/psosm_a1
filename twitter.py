@@ -26,7 +26,7 @@ max_id = -1L
 tweetCount = 0
 print("Downloading max {0} tweets".format(maxTweets))
 
-tweets_list_lowercase = []
+tweets_text_lowercase = []
 
 with open(fName, 'w') as f:
   while tweetCount < maxTweets:
@@ -43,8 +43,8 @@ with open(fName, 'w') as f:
         data = json.loads(obj)
         text = data['text'].encode('utf-8')
         text = str.lower(text)
-        if text[0:2] != 'rt' and text not in tweets_list_lowercase:
-          tweets_list_lowercase.append(text)
+        if text[0:2] != 'rt' and text not in tweets_text_lowercase:
+          tweets_text_lowercase.append(text)
           f.write(obj + '\n')
           tweetCount += 1
       print("Downloaded {0} tweets".format(tweetCount))
