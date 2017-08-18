@@ -27,6 +27,7 @@ tweetCount = 0
 print("Downloading max {0} tweets".format(maxTweets))
 
 tweets_text_lowercase = []
+tweets_list = []
 
 with open(fName, 'w') as f:
   while tweetCount < maxTweets:
@@ -45,6 +46,7 @@ with open(fName, 'w') as f:
         text = str.lower(text)
         if text[0:2] != 'rt' and text not in tweets_text_lowercase:
           tweets_text_lowercase.append(text)
+          tweets_list.append(tweet)
           f.write(obj + '\n')
           tweetCount += 1
       print("Downloaded {0} tweets".format(tweetCount))
