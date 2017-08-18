@@ -4,6 +4,11 @@ import sys
 import json
 import jsonpickle
 import os
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.corpus import stopwords
 
 auth = tweepy.AppAuthHandler(config.access['API_KEY'], config.access['API_SECRET'])
 
@@ -56,3 +61,14 @@ with open(fName, 'w') as f:
       break
 
 print ("Downloaded {0} tweets, saved to {1}".format(tweetCount, fName))
+
+word_list = []
+stop_words = set(stopwords.words('english'))
+
+for tweet_text in tweets_text_lowercase:
+  words = word_tokenize(tweet_text)
+  for word in words:
+    if word not in stop_words:
+      word_list.append(word)
+
+print(word_list)
