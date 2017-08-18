@@ -4,10 +4,9 @@ import sys
 import json
 import jsonpickle
 import os
+from collections import Counter
 import nltk
 nltk.download('stopwords')
-nltk.download('punkt')
-from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 
 auth = tweepy.AppAuthHandler(config.access['API_KEY'], config.access['API_SECRET'])
@@ -21,7 +20,7 @@ else:
   print ("Twitter API authentication successfull")
 
 searchQuery = '#PanamaPapers'
-maxTweets = 10000
+maxTweets = 10
 tweetsPerQry = 100
 fName = 'tweets.txt'
 language = 'en'
@@ -33,6 +32,9 @@ print("Downloading max {0} tweets".format(maxTweets))
 
 tweets_text_lowercase = []
 tweets_list = []
+tweets_words = []
+
+stop_words = set(stopwords.words('english'))
 
 with open(fName, 'w') as f:
   while tweetCount < maxTweets:
@@ -52,6 +54,10 @@ with open(fName, 'w') as f:
         if text[0:2] != 'rt' and text not in tweets_text_lowercase:
           tweets_text_lowercase.append(text)
           tweets_list.append(tweet)
+          temp = text.split()
+          for word in temp:
+            if word.isalpha() and word not in stop_words:
+              tweets_words.append(word)
           f.write(obj + '\n')
           tweetCount += 1
       print("Downloaded {0} tweets".format(tweetCount))
@@ -62,13 +68,7 @@ with open(fName, 'w') as f:
 
 print ("Downloaded {0} tweets, saved to {1}".format(tweetCount, fName))
 
-word_list = []
-stop_words = set(stopwords.words('english'))
+words_dict = Counter(tweets_words)
+histogram_data = words_dict.most_common(20)
+print histogram_data
 
-for tweet_text in tweets_text_lowercase:
-  words = word_tokenize(tweet_text)
-  for word in words:
-    if word not in stop_words:
-      word_list.append(word)
-
-print(word_list)
