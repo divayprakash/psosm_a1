@@ -82,12 +82,14 @@ for month in list_birthmonth_name:
     birthmonth_dict[month] = birthmonth_dict[month] + 1
   else:
     birthmonth_dict[month] = 1
-months = birthmonth_dict.keys()
-months_sorted = sorted(months, key=lambda month: datetime.strptime(month, "%B"))
-keys = months_sorted
+
+keys = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 values = []
-for month in months_sorted:
-  values.append(birthmonth_dict[month])
+for month in keys:
+  if month in birthmonth_dict:
+    values.append(birthmonth_dict[month])
+  else:
+    values.append(0)
 plot(
   [go.Scatter(
     x=keys,
