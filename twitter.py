@@ -36,6 +36,7 @@ print("Downloading max {0} tweets".format(maxTweets))
 tweets_text_lowercase = []
 tweets_list = []
 tweets_words = []
+tweets_countries = []
 
 stop_words = set(stopwords.words('english'))
 
@@ -63,6 +64,9 @@ with open(fName, 'w') as f:
               tweets_words.append(word)
           f.write(obj + '\n')
           tweetCount += 1
+          if data['place']:
+            country = data['place']['country'].encode('utf-8')
+            tweets_countries.append(country)
       print("Downloaded {0} tweets".format(tweetCount))
       max_id = new_tweets[-1].id
     except tweepy.TweepError as e:
@@ -75,5 +79,13 @@ words_dict = Counter(tweets_words)
 histogram_data = words_dict.most_common(20)
 keys = [x[0] for x in histogram_data]
 values = [x[1] for x in histogram_data]
+plot([go.Bar(x=keys, y=values)], show_link=False, filename='histogram.html', image='svg', image_filename='hist')
 
-plot([go.Bar(x=keys, y=values)], image='svg', image_filename='hist')
+countries_dict = Counter(tweets_countries)
+pie_data = countries_dict.most_common()
+labels = [x[0] for x in pie_data]
+values = [x[1] for x in pie_data]
+print pie_data
+print labels
+print values
+plot([go.Pie(labels=labels, values=values)], show_link=False, filename='pie.html', image='svg', image_filename='pie')
