@@ -35,12 +35,19 @@ max_id = -1L
 tweetCount = 0
 print("Downloading max {0} tweets".format(maxTweets))
 
-########## LISTS FOR STORING RELEVANT DATA AS REQUIRED FOR ANALYSIS ##########
+########## VARIABLES FOR STORING RELEVANT DATA AS REQUIRED FOR ANALYSIS ##########
 tweets_text_lowercase = []
 tweets_list = []
 tweets_words = []
 tweets_countries = []
 tweets_dates = []
+count_image = 0
+count_media = 0
+count_url = 0
+count_user_mentions = 0
+count_hashtags = 0
+count_quote = 0
+count_rt = 0
 
 stop_words = set(stopwords.words('english'))
 
@@ -80,14 +87,68 @@ with open(fName, 'w') as f:
           c = created.split()
           date = c[1] + ' ' + c[2]
           tweets_dates.append(date)
+          # get count of tweets containing urls
+          try:
+            if data['entities']['urls']:
+              count_url = count_url + 1
+          except KeyError:
+            pass
+          # get count of tweets containing media
+          try:
+            if data['entities']['media']:
+              for image in data['entities']['media']:
+                if image['type'] == 'photo':
+                  count_image = count_image + 1
+                elif image['media_url']:
+                  count_media = count_media + 1
+          except KeyError:
+            pass
+          # get count of tweets mentioning other users
+          try:
+            if data['entities']['user_mentions']:
+              count_user_mentions = count_user_mentions + 1
+          except KeyError:
+            pass
+          # get count of tweets containing hashtags
+          try:
+            if data['entities']['hashtags']:
+              count_hashtags = count_hashtags + 1
+          except KeyError:
+            pass
+          # get count of tweets that were retweeted by other users
+          try:
+            if data['retweet_count'] > 0:
+              count_rt = count_rt + 1
+          except KeyError:
+            pass
+          # get count of tweets that were quote tweets
+          try:
+            if data['quoted_status']:
+              count_quote = count_quote + 1
+          except KeyError:
+            pass
       print("Downloaded {0} tweets".format(tweetCount))
       max_id = new_tweets[-1].id
     # error handling
     except tweepy.TweepError as e:
-      print("some error : " + str(e))
+      print("ERROR! : " + str(e))
       break
 
 print ("Downloaded {0} tweets, saved to {1}".format(tweetCount, fName))
+print ("{0} tweets contained URLs".format(count_url))
+print ("{0} tweets contained images".format(count_image))
+print ("{0} tweets contained media other than images".format(count_media))
+print ("{0} tweets mentioned other users".format(count_user_mentions))
+print ("{0} tweets contained hashtags".format(count_hashtags))
+print ("{0} tweets out of the total were retweeted by other users".format(count_rt))
+print ("{0} tweets were quote tweets".format(count_quote))
+keys = ['URL', 'Image', 'Other media', 'Mentions', 'Hashtags', 'Retweet', 'Quote']
+height = [5, 5, 5, 5, 5, 5, 5]
+size = [count_url, count_image, count_media, count_user_mentions, count_hashtags, count_rt, count_quote]
+label = []
+for i in size:
+  label.append('Tweets: ' + str(i))
+plot([go.Scatter(x=keys, y=height, text=label, mode='markers', marker=dict(size=size))], show_link=False, filename='histogram.html', image='svg', image_filename='hist')
 
 ########## PROCESSING DATA AND PLOTTING WORDS HISTOGRAM ##########
 words_dict = Counter(tweets_words)
