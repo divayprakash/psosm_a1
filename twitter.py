@@ -41,6 +41,160 @@ tweets_list = []
 tweets_words = []
 tweets_countries = []
 tweets_dates = []
+tweets_time_zones = []
+time_zone_dict = {}
+
+time_zone_dict["International Date Line West"] = "Pacific/Midway"
+time_zone_dict["Midway Island"] = "Pacific/Midway"
+time_zone_dict["American Samoa"] = "Pacific/Pago_Pago"
+time_zone_dict["Hawaii"] = "Pacific/Honolulu"
+time_zone_dict["Alaska"] = "America/Juneau"
+time_zone_dict["Pacific Time (US & Canada)"] = "America/Los_Angeles"
+time_zone_dict["Tijuana"] = "America/Tijuana"
+time_zone_dict["Mountain Time (US & Canada)"] = "America/Denver"
+time_zone_dict["Arizona"] = "America/Phoenix"
+time_zone_dict["Chihuahua"] = "America/Chihuahua"
+time_zone_dict["Mazatlan"] = "America/Mazatlan"
+time_zone_dict["Central Time (US & Canada)"] = "America/Chicago"
+time_zone_dict["Saskatchewan"] = "America/Regina"
+time_zone_dict["Guadalajara"] = "America/Mexico_City"
+time_zone_dict["Mexico City"] = "America/Mexico_City"
+time_zone_dict["Monterrey"] = "America/Monterrey"
+time_zone_dict["Central America"] = "America/Guatemala"
+time_zone_dict["Eastern Time (US & Canada)"] = "America/New_York"
+time_zone_dict["Indiana (East)"] = "America/Indiana/Indianapolis"
+time_zone_dict["Bogota"] = "America/Bogota"
+time_zone_dict["Lima"] = "America/Lima"
+time_zone_dict["Quito"] = "America/Lima"
+time_zone_dict["Atlantic Time (Canada)"] = "America/Halifax"
+time_zone_dict["Caracas"] = "America/Caracas"
+time_zone_dict["La Paz"] = "America/La_Paz"
+time_zone_dict["Santiago"] = "America/Santiago"
+time_zone_dict["Newfoundland"] = "America/St_Johns"
+time_zone_dict["Brasilia"] = "America/Sao_Paulo"
+time_zone_dict["Buenos Aires"] = "America/Argentina/Buenos_Aires"
+time_zone_dict["Montevideo"] = "America/Montevideo"
+time_zone_dict["Georgetown"] = "America/Guyana"
+time_zone_dict["Greenland"] = "America/Godthab"
+time_zone_dict["Mid-Atlantic"] = "Atlantic/South_Georgia"
+time_zone_dict["Azores"] = "Atlantic/Azores"
+time_zone_dict["Cape Verde Is."] = "Atlantic/Cape_Verde"
+time_zone_dict["Dublin"] = "Europe/Dublin"
+time_zone_dict["Edinburgh"] = "Europe/London"
+time_zone_dict["Lisbon"] = "Europe/Lisbon"
+time_zone_dict["London"] = "Europe/London"
+time_zone_dict["Casablanca"] = "Africa/Casablanca"
+time_zone_dict["Monrovia"] = "Africa/Monrovia"
+time_zone_dict["UTC"] = "Etc/UTC"
+time_zone_dict["Belgrade"] = "Europe/Belgrade"
+time_zone_dict["Bratislava"] = "Europe/Bratislava"
+time_zone_dict["Budapest"] = "Europe/Budapest"
+time_zone_dict["Ljubljana"] = "Europe/Ljubljana"
+time_zone_dict["Prague"] = "Europe/Prague"
+time_zone_dict["Sarajevo"] = "Europe/Sarajevo"
+time_zone_dict["Skopje"] = "Europe/Skopje"
+time_zone_dict["Warsaw"] = "Europe/Warsaw"
+time_zone_dict["Zagreb"] = "Europe/Zagreb"
+time_zone_dict["Brussels"] = "Europe/Brussels"
+time_zone_dict["Copenhagen"] = "Europe/Copenhagen"
+time_zone_dict["Madrid"] = "Europe/Madrid"
+time_zone_dict["Paris"] = "Europe/Paris"
+time_zone_dict["Amsterdam"] = "Europe/Amsterdam"
+time_zone_dict["Berlin"] = "Europe/Berlin"
+time_zone_dict["Bern"] = "Europe/Zurich"
+time_zone_dict["Zurich"] = "Europe/Zurich"
+time_zone_dict["Rome"] = "Europe/Rome"
+time_zone_dict["Stockholm"] = "Europe/Stockholm"
+time_zone_dict["Vienna"] = "Europe/Vienna"
+time_zone_dict["West Central Africa"] = "Africa/Algiers"
+time_zone_dict["Bucharest"] = "Europe/Bucharest"
+time_zone_dict["Cairo"] = "Africa/Cairo"
+time_zone_dict["Helsinki"] = "Europe/Helsinki"
+time_zone_dict["Kyiv"] = "Europe/Kiev"
+time_zone_dict["Riga"] = "Europe/Riga"
+time_zone_dict["Sofia"] = "Europe/Sofia"
+time_zone_dict["Tallinn"] = "Europe/Tallinn"
+time_zone_dict["Vilnius"] = "Europe/Vilnius"
+time_zone_dict["Athens"] = "Europe/Athens"
+time_zone_dict["Istanbul"] = "Europe/Istanbul"
+time_zone_dict["Minsk"] = "Europe/Minsk"
+time_zone_dict["Jerusalem"] = "Asia/Jerusalem"
+time_zone_dict["Harare"] = "Africa/Harare"
+time_zone_dict["Pretoria"] = "Africa/Johannesburg"
+time_zone_dict["Kaliningrad"] = "Europe/Kaliningrad"
+time_zone_dict["Moscow"] = "Europe/Moscow"
+time_zone_dict["St. Petersburg"] = "Europe/Moscow"
+time_zone_dict["Volgograd"] = "Europe/Volgograd"
+time_zone_dict["Samara"] = "Europe/Samara"
+time_zone_dict["Kuwait"] = "Asia/Kuwait"
+time_zone_dict["Riyadh"] = "Asia/Riyadh"
+time_zone_dict["Nairobi"] = "Africa/Nairobi"
+time_zone_dict["Baghdad"] = "Asia/Baghdad"
+time_zone_dict["Tehran"] = "Asia/Tehran"
+time_zone_dict["Abu Dhabi"] = "Asia/Muscat"
+time_zone_dict["Muscat"] = "Asia/Muscat"
+time_zone_dict["Baku"] = "Asia/Baku"
+time_zone_dict["Tbilisi"] = "Asia/Tbilisi"
+time_zone_dict["Yerevan"] = "Asia/Yerevan"
+time_zone_dict["Kabul"] = "Asia/Kabul"
+time_zone_dict["Ekaterinburg"] = "Asia/Yekaterinburg"
+time_zone_dict["Islamabad"] = "Asia/Karachi"
+time_zone_dict["Karachi"] = "Asia/Karachi"
+time_zone_dict["Tashkent"] = "Asia/Tashkent"
+time_zone_dict["Chennai"] = "Asia/Kolkata"
+time_zone_dict["Kolkata"] = "Asia/Kolkata"
+time_zone_dict["Mumbai"] = "Asia/Kolkata"
+time_zone_dict["New Delhi"] = "Asia/Kolkata"
+time_zone_dict["Kathmandu"] = "Asia/Kathmandu"
+time_zone_dict["Astana"] = "Asia/Dhaka"
+time_zone_dict["Dhaka"] = "Asia/Dhaka"
+time_zone_dict["Sri Jayawardenepura"] = "Asia/Colombo"
+time_zone_dict["Almaty"] = "Asia/Almaty"
+time_zone_dict["Novosibirsk"] = "Asia/Novosibirsk"
+time_zone_dict["Rangoon"] = "Asia/Rangoon"
+time_zone_dict["Bangkok"] = "Asia/Bangkok"
+time_zone_dict["Hanoi"] = "Asia/Bangkok"
+time_zone_dict["Jakarta"] = "Asia/Jakarta"
+time_zone_dict["Krasnoyarsk"] = "Asia/Krasnoyarsk"
+time_zone_dict["Beijing"] = "Asia/Shanghai"
+time_zone_dict["Chongqing"] = "Asia/Chongqing"
+time_zone_dict["Hong Kong"] = "Asia/Hong_Kong"
+time_zone_dict["Urumqi"] = "Asia/Urumqi"
+time_zone_dict["Kuala Lumpur"] = "Asia/Kuala_Lumpur"
+time_zone_dict["Singapore"] = "Asia/Singapore"
+time_zone_dict["Taipei"] = "Asia/Taipei"
+time_zone_dict["Perth"] = "Australia/Perth"
+time_zone_dict["Irkutsk"] = "Asia/Irkutsk"
+time_zone_dict["Ulaanbaatar"] = "Asia/Ulaanbaatar"
+time_zone_dict["Seoul"] = "Asia/Seoul"
+time_zone_dict["Osaka"] = "Asia/Tokyo"
+time_zone_dict["Sapporo"] = "Asia/Tokyo"
+time_zone_dict["Tokyo"] = "Asia/Tokyo"
+time_zone_dict["Yakutsk"] = "Asia/Yakutsk"
+time_zone_dict["Darwin"] = "Australia/Darwin"
+time_zone_dict["Adelaide"] = "Australia/Adelaide"
+time_zone_dict["Canberra"] = "Australia/Melbourne"
+time_zone_dict["Melbourne"] = "Australia/Melbourne"
+time_zone_dict["Sydney"] = "Australia/Sydney"
+time_zone_dict["Brisbane"] = "Australia/Brisbane"
+time_zone_dict["Hobart"] = "Australia/Hobart"
+time_zone_dict["Vladivostok"] = "Asia/Vladivostok"
+time_zone_dict["Guam"] = "Pacific/Guam"
+time_zone_dict["Port Moresby"] = "Pacific/Port_Moresby"
+time_zone_dict["Magadan"] = "Asia/Magadan"
+time_zone_dict["Srednekolymsk"] = "Asia/Srednekolymsk"
+time_zone_dict["Solomon Is."] = "Pacific/Guadalcanal"
+time_zone_dict["New Caledonia"] = "Pacific/Noumea"
+time_zone_dict["Fiji"] = "Pacific/Fiji"
+time_zone_dict["Kamchatka"] = "Asia/Kamchatka"
+time_zone_dict["Marshall Is."] = "Pacific/Majuro"
+time_zone_dict["Auckland"] = "Pacific/Auckland"
+time_zone_dict["Wellington"] = "Pacific/Auckland"
+time_zone_dict["Nuku'alofa"] = "Pacific/Tongatapu"
+time_zone_dict["Tokelau Is."] = "Pacific/Fakaofo"
+time_zone_dict["Chatham Is."] = "Pacific/Chatham"
+time_zone_dict["Samoa"] = "Pacific/Apia"
+
 count_image = 0
 count_media = 0
 count_url = 0
@@ -133,6 +287,12 @@ with open(fName, 'w') as f:
           try:
             if data['quoted_status']:
               count_quote = count_quote + 1
+          except KeyError:
+            pass
+          # get time zone info
+          try:
+            if data['user']['time_zone'] != "null":
+              tweets_time_zones.append(time_zone_dict[data['user']['time_zone']])
           except KeyError:
             pass
       print("Downloaded {0} tweets".format(tweetCount))
@@ -235,4 +395,21 @@ plot(
   filename='line.html',
   image='svg',
   image_filename='line'
+)
+
+########## PROCESSING DATA AND PLOTTING TIMEZONE PIE CHART ##########
+time_dict = Counter(tweets_time_zones)
+pie2_data = time_dict.most_common()
+print pie2_data
+labels = [x[0] for x in pie2_data]
+values = [x[1] for x in pie2_data]
+plot(
+  [go.Pie(
+    labels=labels,
+    values=values
+  )],
+  show_link=False,
+  filename='pie2.html',
+  image='svg',
+  image_filename='pie2'
 )
