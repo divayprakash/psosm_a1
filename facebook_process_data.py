@@ -87,7 +87,7 @@ plot(
     y=values
   )],
   show_link=False,
-  filename='Birthday Graph.html',
+  filename='Birthmonth Graph.html',
   image='svg',
   image_filename='fb_line'
 )
