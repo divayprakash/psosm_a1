@@ -1,4 +1,8 @@
 import json
+from collections import Counter
+import plotly
+from plotly.offline import plot
+import plotly.graph_objs as go
 
 with open('data.json') as json_data:
   data = json.load(json_data)
@@ -13,6 +17,17 @@ for record in data:
   for language in record['languages']:
     list_languages.append(language['name'].encode('utf-8'))
 
-print list_hometown
-print list_birthday
-print list_languages
+hometown_dict = Counter(list_hometown)
+pie_data = hometown_dict.most_common()
+labels = [x[0] for x in pie_data]
+values = [x[1] for x in pie_data]
+plot(
+  [go.Pie(
+    labels=labels,
+    values=values
+  )],
+  show_link=False,
+  filename='Hometown Pie Chart.html',
+  image='svg',
+  image_filename='fb_pie'
+)
