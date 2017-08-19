@@ -11,7 +11,7 @@ if (not api):
   sys.exit(-1)
 
 ########## DEFINE VARIABLES ##########
-user = "@divayprakash3"
+user = raw_input("Enter Twitter user handle: ")
 tweets = []
 tweetCount = 0
 
