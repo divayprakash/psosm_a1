@@ -142,13 +142,30 @@ print ("{0} tweets mentioned other users".format(count_user_mentions))
 print ("{0} tweets contained hashtags".format(count_hashtags))
 print ("{0} tweets out of the total were retweeted by other users".format(count_rt))
 print ("{0} tweets were quote tweets".format(count_quote))
-keys = ['URL', 'Image', 'Other media', 'Mentions', 'Hashtags', 'Retweet', 'Quote']
-height = [5, 5, 5, 5, 5, 5, 5]
+keys = ['URLs', 'Images', 'Other media', 'Mentions', 'Hashtags', 'Retweeted', 'Quotes']
+height = [4 for i in range(0, 8)]
 size = [count_url, count_image, count_media, count_user_mentions, count_hashtags, count_rt, count_quote]
+color = ['rgb(213,0,0)', 'rgb(26,35,126)', 'rgb(106,27,154)', 'rgb(118,255,3)', 'rgb(255,196,0)', 'rgb(255,61,0)', 'rgb(33,150,243)']
 label = []
-for i in size:
-  label.append('Tweets: ' + str(i))
-plot([go.Scatter(x=keys, y=height, text=label, mode='markers', marker=dict(size=size))], show_link=False, filename='histogram.html', image='svg', image_filename='hist')
+for i in range(7):
+  s = str.lower(keys[i]) + " : " + str(size[i])
+  print s
+  label.append(s)
+plot(
+  [go.Scatter(
+    x=keys,
+    y=height,
+    text=label,
+    mode='markers',
+    marker=dict(
+      color=color,
+      size=size)
+  )],
+  show_link=False,
+  filename='bubble.html',
+  image='svg',
+  image_filename='bubble'
+)
 
 ########## PROCESSING DATA AND PLOTTING WORDS HISTOGRAM ##########
 words_dict = Counter(tweets_words)
