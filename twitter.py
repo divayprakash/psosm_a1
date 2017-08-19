@@ -42,6 +42,7 @@ tweets_words = []
 tweets_countries = []
 tweets_dates = []
 tweets_time_zones = []
+accounts_created = []
 time_zone_dict = {}
 
 time_zone_dict["International Date Line West"] = "Pacific/Midway"
@@ -293,6 +294,9 @@ with open(fName, 'w') as f:
               tweets_time_zones.append(time_zone_dict[data['user']['time_zone']])
           except KeyError:
             pass
+          # get account creation info
+          c = data['user']['created_at'].split()
+          accounts_created.append(c[-1])
       print("Downloaded {0} tweets".format(tweetCount))
       max_id = new_tweets[-1].id
     # error handling
@@ -410,4 +414,28 @@ plot(
   filename='pie2.html',
   image='svg',
   image_filename='pie2'
+)
+
+########## PROCESSING DATES AND PLOTTING ACCOUNT CREATION GRAPH ##########
+created_dict = {}
+for date in accounts_created:
+  if date in created_dict:
+    created_dict[date] = created_dict[date] + 1
+  else:
+    created_dict[date] = 1
+created = created_dict.keys()
+created_sorted = sorted(created, key=lambda date: datetime.strptime(date, "%Y"))
+keys = created_sorted
+values = []
+for create in created_sorted:
+  values.append(created_dict[create])
+plot(
+  [go.Scatter(
+    x=keys,
+    y=values
+  )],
+  show_link=False,
+  filename='line2.html',
+  image='svg',
+  image_filename='line2'
 )
