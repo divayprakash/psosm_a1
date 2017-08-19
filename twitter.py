@@ -51,6 +51,11 @@ count_rt = 0
 count_image_rt = 0
 
 stop_words = set(stopwords.words('english'))
+stop_words.update(
+  ('u','https','fakenews','fake','news','and','i','a','and','so','arent',
+   'this','when','it','many','cant','yes','no','these'
+  )
+)
 
 ########## MAIN LOOP FOR TWEET RETREIVAL AND PROCESSING ##########
 with open(fName, 'w') as f:
@@ -146,11 +151,11 @@ print ("{0} tweets contained hashtags".format(count_hashtags))
 print ("{0} tweets were quote tweets".format(count_quote))
 
 print ("Out of {0} tweets containing images, {1} were retweeted by other users".format(count_image, count_image_rt))
-temp = (count_image_rt/count_image) * 100
-print ("Only {0}%% of tweets containing images were retweeted!")
+temp = (count_image_rt  * 100.0) / count_image
+print ("Only {:f}%% of tweets containing images were retweeted!".format(temp))
 print ("Out of {0} tweets, {1} were retweeted by other users".format(tweetCount, count_rt))
-temp = (count_rt - count_image_rt) * 100/(tweetCount - count_image)
-print ("However {0}%% of all tweets except those containing images were retweeted!")
+temp = ((count_rt - count_image_rt) * 100.0) / (tweetCount - count_image)
+print ("However {:f}%% of all tweets except those containing images were retweeted!".format(temp))
 
 keys = ['URLs', 'Images', 'Other media', 'Mentions', 'Hashtags', 'Retweeted', 'Quotes']
 height = [6 for i in range(0, 8)]
