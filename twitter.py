@@ -164,7 +164,6 @@ color = ['rgb(213,0,0)', 'rgb(26,35,126)', 'rgb(106,27,154)', 'rgb(118,255,3)', 
 label = []
 for i in range(7):
   s = str.lower(keys[i]) + " : " + str(size[i])
-  print s
   label.append(s)
 plot(
   [go.Scatter(
