@@ -13,11 +13,17 @@ if (not api):
 ########## DEFINE VARIABLES ##########
 user = "@divayprakash3"
 tweets = []
+tweetCount = 0
 
 ########## GET ALL TWEETS OF USER ##########
 for tweet in tweepy.Cursor(api.user_timeline, id=user).items():
   tweets.append(tweet)
+  tweetCount = tweetCount + 1
 
 ########## PRINT FIRST TWEET ##########
-print tweets[-1].text
-print tweets[-1].created_at
+if tweetCount == 3000:
+  print ("Very first tweet cannot be read due to Twitter API restrictions!")
+else:
+  tweet = tweets[-1]
+  print tweet.text
+  print tweet.created_at
