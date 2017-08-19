@@ -104,11 +104,5 @@ ENV/
 # config file
 *config.py
 
-# data file
-*.txt
-
 # Linux system files
 *.swp
-
-# HTML plot files
-*.html
