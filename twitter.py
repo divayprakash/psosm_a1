@@ -48,6 +48,7 @@ count_user_mentions = 0
 count_hashtags = 0
 count_quote = 0
 count_rt = 0
+count_image_rt = 0
 
 stop_words = set(stopwords.words('english'))
 
@@ -99,6 +100,8 @@ with open(fName, 'w') as f:
               for image in data['entities']['media']:
                 if image['type'] == 'photo':
                   count_image = count_image + 1
+                  if data['retweet_count'] > 0:
+                    count_image_rt = count_image_rt + 1
                 elif image['media_url']:
                   count_media = count_media + 1
           except KeyError:
@@ -140,8 +143,15 @@ print ("{0} tweets contained images".format(count_image))
 print ("{0} tweets contained media other than images".format(count_media))
 print ("{0} tweets mentioned other users".format(count_user_mentions))
 print ("{0} tweets contained hashtags".format(count_hashtags))
-print ("{0} tweets out of the total were retweeted by other users".format(count_rt))
 print ("{0} tweets were quote tweets".format(count_quote))
+
+print ("Out of {0} tweets containing images, {1} were retweeted by other users".format(count_image, count_image_rt))
+temp = (count_image_rt/count_image) * 100
+print ("Only {0}%% of tweets containing images were retweeted!")
+print ("Out of {0} tweets, {1} were retweeted by other users".format(tweetCount, count_rt))
+temp = (count_rt - count_image_rt) * 100/(tweetCount - count_image)
+print ("However {0}%% of all tweets except those containing images were retweeted!")
+
 keys = ['URLs', 'Images', 'Other media', 'Mentions', 'Hashtags', 'Retweeted', 'Quotes']
 height = [6 for i in range(0, 8)]
 size = [count_url, count_image, count_media, count_user_mentions, count_hashtags, count_rt, count_quote]
