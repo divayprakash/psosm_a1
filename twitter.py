@@ -11,6 +11,7 @@ import plotly.graph_objs as go
 import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
+from datetime import datetime
 
 auth = tweepy.AppAuthHandler(config.access['API_KEY'], config.access['API_SECRET'])
 
@@ -37,6 +38,7 @@ tweets_text_lowercase = []
 tweets_list = []
 tweets_words = []
 tweets_countries = []
+tweets_dates = []
 
 stop_words = set(stopwords.words('english'))
 
@@ -67,6 +69,10 @@ with open(fName, 'w') as f:
           if data['place']:
             country = data['place']['country'].encode('utf-8')
             tweets_countries.append(country)
+          created = data['created_at'].encode('utf-8')
+          c = created.split()
+          date = c[1] + ' ' + c[2]
+          tweets_dates.append(date)
       print("Downloaded {0} tweets".format(tweetCount))
       max_id = new_tweets[-1].id
     except tweepy.TweepError as e:
@@ -86,3 +92,17 @@ pie_data = countries_dict.most_common()
 labels = [x[0] for x in pie_data]
 values = [x[1] for x in pie_data]
 plot([go.Pie(labels=labels, values=values)], show_link=False, filename='pie.html', image='svg', image_filename='pie')
+
+dates_dict = {}
+for date in tweets_dates:
+  if date in dates_dict:
+    dates_dict[date] = dates_dict[date] + 1
+  else:
+    dates_dict[date] = 1
+dates = dates_dict.keys()
+dates_sorted = sorted(dates, key=lambda date: datetime.strptime(date, "%b %d"))
+keys = dates_sorted
+values = []
+for date in dates_sorted:
+  values.append(dates_dict[date])
+plot([go.Scatter(x=keys, y=values)], show_link=False, filename='line.html', image='svg', image_filename='line')
