@@ -206,9 +206,7 @@ count_image_rt = 0
 
 stop_words = set(stopwords.words('english'))
 stop_words.update(
-  ('u','https','fakenews','fake','news','and','i','a','and','so','arent',
-   'this','when','it','many','cant','yes','no','these'
-  )
+  ('u','https','fakenews','fake','news')
 )
 
 ########## MAIN LOOP FOR TWEET RETREIVAL AND PROCESSING ##########
