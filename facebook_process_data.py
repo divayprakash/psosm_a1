@@ -31,3 +31,18 @@ plot(
   image='svg',
   image_filename='fb_pie'
 )
+
+language_dict = Counter(list_languages)
+pie_data = language_dict.most_common()
+labels = [x[0] for x in pie_data]
+values = [x[1] for x in pie_data]
+plot(
+  [go.Pie(
+    labels=labels,
+    values=values
+  )],
+  show_link=False,
+  filename='Language Pie Chart.html',
+  image='svg',
+  image_filename='fb_pie2'
+)
