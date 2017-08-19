@@ -20,3 +20,4 @@ for tweet in tweepy.Cursor(api.user_timeline, id=user).items():
 
 ########## PRINT FIRST TWEET ##########
 print tweets[-1].text
+print tweets[-1].created_at
