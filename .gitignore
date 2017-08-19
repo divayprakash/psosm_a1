@@ -109,3 +109,6 @@ ENV/
 
 # Linux system files
 *.swp
+
+# HTML plot files
+*.html
