@@ -159,7 +159,7 @@ plot(
     mode='markers',
     marker=dict(
       color=color,
-      size=size)
+      size=[i/2 for i in size])
   )],
   show_link=False,
   filename='bubble.html',
