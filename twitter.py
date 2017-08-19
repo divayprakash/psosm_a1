@@ -344,7 +344,7 @@ plot(
       size=[i/2 for i in size])
   )],
   show_link=False,
-  filename='bubble.html',
+  filename='Entities Graph.html',
   image='svg',
   image_filename='bubble'
 )
@@ -360,7 +360,7 @@ plot(
     y=values
   )],
   show_link=False,
-  filename='histogram.html',
+  filename='Words Histogram.html',
   image='svg',
   image_filename='hist'
 )
@@ -376,7 +376,7 @@ plot(
     values=values
   )],
   show_link=False,
-  filename='pie.html',
+  filename='Country Pie Chart.html',
   image='svg',
   image_filename='pie'
 )
@@ -400,7 +400,7 @@ plot(
     y=values
   )],
   show_link=False,
-  filename='line.html',
+  filename='Time Series Graph.html',
   image='svg',
   image_filename='line'
 )
@@ -416,7 +416,7 @@ plot(
     values=values
   )],
   show_link=False,
-  filename='pie2.html',
+  filename='Timezone Pie Chart.html',
   image='svg',
   image_filename='pie2'
 )
@@ -440,7 +440,7 @@ plot(
     y=values
   )],
   show_link=False,
-  filename='line2.html',
+  filename='Account Creation Line Graph.html',
   image='svg',
   image_filename='line2'
 )
