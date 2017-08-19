@@ -307,6 +307,7 @@ with open(fName, 'w') as f:
       print("ERROR! : " + str(e))
       break
 
+########## ENTITIES INFORMATION ##########
 print ("Downloaded {0} tweets, saved to {1}".format(tweetCount, fName))
 print ("{0} tweets contained URLs".format(count_url))
 print ("{0} tweets contained images".format(count_image))
@@ -315,6 +316,7 @@ print ("{0} tweets mentioned other users".format(count_user_mentions))
 print ("{0} tweets contained hashtags".format(count_hashtags))
 print ("{0} tweets were quote tweets".format(count_quote))
 
+########## IMAGES CONCLUSION ##########
 print ("Out of {0} tweets containing images, {1} were retweeted by other users".format(count_image, count_image_rt))
 temp = (count_image_rt  * 100.0) / count_image
 print ("Only {:f}%% of tweets containing images were retweeted!".format(temp))
@@ -322,6 +324,7 @@ print ("Out of {0} tweets, {1} were retweeted by other users".format(tweetCount,
 temp = ((count_rt - count_image_rt) * 100.0) / (tweetCount - count_image)
 print ("However {:f}%% of all tweets except those containing images were retweeted!".format(temp))
 
+########## PROCESSING DATA AND PRINTING ENTITIES GRAPH ##########
 keys = ['URLs', 'Images', 'Other media', 'Mentions', 'Hashtags', 'Retweeted', 'Quotes']
 height = [6 for i in range(0, 8)]
 size = [count_url, count_image, count_media, count_user_mentions, count_hashtags, count_rt, count_quote]
