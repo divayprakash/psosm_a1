@@ -143,7 +143,7 @@ print ("{0} tweets contained hashtags".format(count_hashtags))
 print ("{0} tweets out of the total were retweeted by other users".format(count_rt))
 print ("{0} tweets were quote tweets".format(count_quote))
 keys = ['URLs', 'Images', 'Other media', 'Mentions', 'Hashtags', 'Retweeted', 'Quotes']
-height = [4 for i in range(0, 8)]
+height = [6 for i in range(0, 8)]
 size = [count_url, count_image, count_media, count_user_mentions, count_hashtags, count_rt, count_quote]
 color = ['rgb(213,0,0)', 'rgb(26,35,126)', 'rgb(106,27,154)', 'rgb(118,255,3)', 'rgb(255,196,0)', 'rgb(255,61,0)', 'rgb(33,150,243)']
 label = []
@@ -172,14 +172,32 @@ words_dict = Counter(tweets_words)
 histogram_data = words_dict.most_common(20)
 keys = [x[0] for x in histogram_data]
 values = [x[1] for x in histogram_data]
-plot([go.Bar(x=keys, y=values)], show_link=False, filename='histogram.html', image='svg', image_filename='hist')
+plot(
+  [go.Bar(
+    x=keys,
+    y=values
+  )],
+  show_link=False,
+  filename='histogram.html',
+  image='svg',
+  image_filename='hist'
+)
 
 ########## PROCESSING DATA AND PLOTTING COUNTRY PIE CHART ##########
 countries_dict = Counter(tweets_countries)
 pie_data = countries_dict.most_common()
 labels = [x[0] for x in pie_data]
 values = [x[1] for x in pie_data]
-plot([go.Pie(labels=labels, values=values)], show_link=False, filename='pie.html', image='svg', image_filename='pie')
+plot(
+  [go.Pie(
+    labels=labels,
+    values=values
+  )],
+  show_link=False,
+  filename='pie.html',
+  image='svg',
+  image_filename='pie'
+)
 
 ########## PROCESSING DATES AND PLOTTING TIME SERIES GRAPH ##########
 dates_dict = {}
@@ -194,4 +212,13 @@ keys = dates_sorted
 values = []
 for date in dates_sorted:
   values.append(dates_dict[date])
-plot([go.Scatter(x=keys, y=values)], show_link=False, filename='line.html', image='svg', image_filename='line')
+plot(
+  [go.Scatter(
+    x=keys,
+    y=values
+  )],
+  show_link=False,
+  filename='line.html',
+  image='svg',
+  image_filename='line'
+)
