@@ -85,7 +85,4 @@ countries_dict = Counter(tweets_countries)
 pie_data = countries_dict.most_common()
 labels = [x[0] for x in pie_data]
 values = [x[1] for x in pie_data]
-print pie_data
-print labels
-print values
 plot([go.Pie(labels=labels, values=values)], show_link=False, filename='pie.html', image='svg', image_filename='pie')
