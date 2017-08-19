@@ -3,7 +3,7 @@ import config  # external configuration file with API keys
 import tweepy
 
 ########## CONNECTING TO TWITTER API USING TWEEPY ##########
-auth = tweepy.AppAuthHandler(config.access['API_KEY'], config.access['API_SECRET'])
+auth = tweepy.AppAuthHandler(config.twitter['API_KEY'], config.twitter['API_SECRET'])
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
 if (not api):
