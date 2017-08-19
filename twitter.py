@@ -405,7 +405,6 @@ plot(
 ########## PROCESSING DATA AND PLOTTING TIMEZONE PIE CHART ##########
 time_dict = Counter(tweets_time_zones)
 pie2_data = time_dict.most_common()
-print pie2_data
 labels = [x[0] for x in pie2_data]
 values = [x[1] for x in pie2_data]
 plot(
