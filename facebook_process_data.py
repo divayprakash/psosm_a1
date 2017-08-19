@@ -1,3 +1,4 @@
+########## IMPORTS ##########
 import json
 from collections import Counter
 import plotly
@@ -5,13 +6,16 @@ from plotly.offline import plot
 import plotly.graph_objs as go
 from datetime import datetime
 
+########## LOAD JSON ##########
 with open('data.json') as json_data:
   data = json.load(json_data)
 
+########## VARIABLES FOR STORING RELEVANT DATA AS REQUIRED FOR ANALYSIS ##########
 list_hometown = []
 list_languages = []
 list_birthmonth = []
 
+########## ITERATE OVER RECORDS AND RECORD DATA ##########
 for record in data:
   list_hometown.append(record['hometown']['name'].encode('utf-8'))
   birthday = record['birthday'].encode('utf-8')
@@ -21,6 +25,7 @@ for record in data:
   for language in record['languages']:
     list_languages.append(language['name'].encode('utf-8'))
 
+########## PROCESSING DATA AND PRINTING HOMETOWN PIE CHART ##########
 hometown_dict = Counter(list_hometown)
 pie_data = hometown_dict.most_common()
 labels = [x[0] for x in pie_data]
@@ -36,6 +41,7 @@ plot(
   image_filename='fb_pie'
 )
 
+########## PROCESSING DATA AND PRINTING LANGUAGE PIE CHART ##########
 language_dict = Counter(list_languages)
 pie_data = language_dict.most_common()
 labels = [x[0] for x in pie_data]
@@ -51,6 +57,7 @@ plot(
   image_filename='fb_pie2'
 )
 
+########## PROCESSING DATA AND PRINTING BIRTHMONTH LINE GRAPH ##########
 month_mapping = {}
 month_mapping["01"] = "January"
 month_mapping["02"] = "February"
