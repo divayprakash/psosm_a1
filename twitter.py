@@ -43,6 +43,7 @@ tweets_countries = []
 tweets_dates = []
 tweets_time_zones = []
 accounts_created = []
+usernames = []
 time_zone_dict = {}
 
 time_zone_dict["International Date Line West"] = "Pacific/Midway"
@@ -295,8 +296,10 @@ with open(fName, 'w') as f:
           except KeyError:
             pass
           # get account creation info
-          c = data['user']['created_at'].split()
-          accounts_created.append(c[-1])
+          if data['user']['id'] not in usernames:
+            c = data['user']['created_at'].split()
+            accounts_created.append(c[-1])
+            usernames.append(data['user']['id'])
       print("Downloaded {0} tweets".format(tweetCount))
       max_id = new_tweets[-1].id
     # error handling
